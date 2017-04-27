@@ -5,8 +5,7 @@ data class MyDate(val year: Int, val month: Int, val dayOfMonth: Int) : Comparab
         return when {
             year != other.year -> year - other.year
             month != other.month -> month - other.month
-            dayOfMonth != other.dayOfMonth -> dayOfMonth - other.dayOfMonth
-            else -> 0
+            else -> dayOfMonth - other.dayOfMonth
         }
     }
 }
