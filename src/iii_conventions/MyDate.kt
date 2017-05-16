@@ -21,7 +21,7 @@ enum class TimeInterval {
 class DateRange(val start: MyDate, val endInclusive: MyDate) : Iterable<MyDate> {
     override fun iterator(): Iterator<MyDate> = MyDateIterator(this)
 
-    operator fun contains(date: MyDate): Boolean = date in start..endInclusive
+    operator fun contains(date: MyDate): Boolean = start <= date && date <= endInclusive
 }
 
 class MyDateIterator(val dateRange: DateRange) : Iterator<MyDate> {
