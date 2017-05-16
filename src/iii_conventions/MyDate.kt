@@ -37,6 +37,6 @@ class DateRange(val start: MyDate, val endInclusive: MyDate) : Iterable<MyDate> 
     }
 
     operator fun contains(date: MyDate): Boolean {
-        return date >= start && date <= endInclusive
+        return date in start..endInclusive
     }
 }
