@@ -20,23 +20,25 @@ enum class TimeInterval {
 
 class DateRange(val start: MyDate, val endInclusive: MyDate) : Iterable<MyDate> {
     override fun iterator(): Iterator<MyDate> {
-        return object : Iterator<MyDate> {
-
-            var current = start
-
-            override fun hasNext(): Boolean {
-                return current <= endInclusive
-            }
-
-            override fun next(): MyDate {
-                val result = current
-                current = current.addTimeIntervals(TimeInterval.DAY, 1)
-                return result
-            }
-        }
+        return MyDateIterator(this)
     }
 
     operator fun contains(date: MyDate): Boolean {
         return date in start..endInclusive
+    }
+}
+
+class MyDateIterator(val dateRange: DateRange) : Iterator<MyDate> {
+
+    var current = dateRange.start
+
+    override fun hasNext(): Boolean {
+        return current <= dateRange.endInclusive
+    }
+
+    override fun next(): MyDate {
+        val result = current
+        current = current.addTimeIntervals(TimeInterval.DAY, 1)
+        return result
     }
 }
