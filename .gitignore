@@ -5,4 +5,4 @@ workspace.xml
 build
 local.properties
 
-.idea/sonarlint
+.idea
