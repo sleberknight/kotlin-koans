@@ -26,11 +26,16 @@ class D {
     // You can look at the bytecode (by calling "Show Kotlin Bytecode" action in IntelliJ IDEA) for details.
 }
 
-class EffectiveDate<R> : ReadWriteProperty<R, MyDate> {
+class EffectiveDate<in R> : ReadWriteProperty<R, MyDate> {
     var timeInMillis: Long? = null
 
-    operator override fun getValue(thisRef: R, property: KProperty<*>): MyDate = todoTask35()
-    operator override fun setValue(thisRef: R, property: KProperty<*>, value: MyDate) = todoTask35()
+    override operator fun getValue(thisRef: R, property: KProperty<*>): MyDate {
+        return timeInMillis?.toDate() ?: throw IllegalStateException("not initialized")
+    }
+
+    override operator fun setValue(thisRef: R, property: KProperty<*>, value: MyDate) {
+        timeInMillis = value.toMillis()
+    }
 }
 
 fun MyDate.toMillis(): Long {

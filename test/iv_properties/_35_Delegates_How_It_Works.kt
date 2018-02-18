@@ -12,4 +12,10 @@ class _35_Delegates_How_It_Works {
         assertEquals(1, d.date.month)
         assertEquals(13, d.date.dayOfMonth)
     }
+
+    @Test(expected = IllegalStateException::class)
+    fun testDateNotInitialized_ShouldThrowIllegalStateException() {
+        val d = D()
+        d.date
+    }
 }
